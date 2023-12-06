@@ -25,6 +25,8 @@ const refreshToeknArry = process.env.REFRESH_TOKENS.split(",").map((i) =>
     })
       .then((res) => res.json())
       .then((json) => {
+        if (json.code === "InvalidParameter.RefreshToken")
+          throw new Error(json.message);
         let access_token = json.access_token;
         // console.log(access_token);
 
