@@ -25,8 +25,11 @@ const refreshToeknArry = process.env.REFRESH_TOKENS.split(",").map((i) =>
     })
       .then((res) => res.json())
       .then((json) => {
-        if (json.code === "InvalidParameter.RefreshToken")
-          throw new Error(json.message);
+        if (json.code === "InvalidParameter.RefreshToken") {
+          throw new Error(
+            "发生错误，终止 GitHub Actions。原因：" + json.message
+          );
+        }
         let access_token = json.access_token;
         // console.log(access_token);
 
@@ -67,12 +70,16 @@ const refreshToeknArry = process.env.REFRESH_TOKENS.split(",").map((i) =>
           })
           .catch((err) => console.log(err));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        process.exit(1); // 1 表示退出并标记为失败
+      });
   }
   // await notify.sendNotifyBark(`v2free 自动签到结果`,allnotify)
 })()
   .catch((e) => {
     console.error(`❗️  运行错误！\n${e}`);
+    process.exit(1);
   })
   .finally();
 // notify.sendNotify(`v2free 自动签到结果`,allnotify)
