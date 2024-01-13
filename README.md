@@ -7,7 +7,12 @@
 ## secrets 配置
 
 - `REFRESH_TOKENS`: 登录[阿里云盘](https://www.aliyundrive.com/drive)，在 `local storage` 中的 `token` 里查找 `refresh_token` 字段
+
+  
+
   > 如果需要添加多个账号，请使用 `,` 分隔（英文逗号）
+  >
+  > [快速获取 refresh_token](https://alist.nn.ci/zh/guide/drivers/aliyundrive.html)
 
 ## 感谢
 
